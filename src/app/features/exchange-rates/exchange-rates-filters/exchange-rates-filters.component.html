@@ -1,0 +1,24 @@
+<h2 mat-dialog-title>Change currency date</h2>
+<mat-dialog-content>
+  <form [formGroup]="form">
+    <mat-form-field appearance="outline">
+      <mat-label>Choose a date</mat-label>
+      <input matInput [matDatepicker]="picker" formControlName="date" />
+      <mat-datepicker-toggle
+        matIconSuffix
+        [for]="picker"
+      ></mat-datepicker-toggle>
+      <mat-datepicker #picker></mat-datepicker>
+
+      @if (dateControl?.invalid) {
+        <mat-error>
+          <app-validation-errors [control]="dateControl!"></app-validation-errors>
+        </mat-error>
+      }
+    </mat-form-field>
+  </form>
+</mat-dialog-content>
+<mat-dialog-actions>
+  <button mat-button mat-dialog-close>Cancel</button>
+  <button mat-flat-button (click)="submit()">Save</button>
+</mat-dialog-actions>

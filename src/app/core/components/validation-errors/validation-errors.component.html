@@ -1,0 +1,9 @@
+@if (controlErrors()?.['required']) {
+    This field is required
+} @else if (controlErrors()?.['min']) {
+    Value must be greater than {{ controlErrors()?.['min'].min }}
+} @else if (controlErrors()?.['notFutureDate']) {
+    Date from the future is invalid
+} @else {
+    Unknown error
+}

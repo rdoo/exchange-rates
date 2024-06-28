@@ -1,4 +1,45 @@
 /* You can add global styles to this file, and also import other style files */
 
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+  background-color: var(--mat-app-background-color);
+}
+
+// global dialog styles
+.mat-mdc-dialog-panel {
+  --mat-dialog-container-min-width: 320px;
+  --mat-dialog-container-max-width: 320px;
+
+  @media (min-width: 768px) {
+    --mat-dialog-container-min-width: 480px;
+    --mat-dialog-container-max-width: 480px;
+  }
+}
+
+.mat-mdc-dialog-content {
+  form {
+    // prevent clipping with dialog title
+    padding-top: 1rem;
+  }
+}
+
+// global form styles
+form {
+  .mat-mdc-form-field {
+    display: block;
+    width: 100%;
+    margin-bottom: 0.5rem;
+  }
+}

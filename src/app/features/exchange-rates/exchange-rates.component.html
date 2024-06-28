@@ -1,0 +1,16 @@
+<mat-toolbar>
+  <span>Exchange rates for {{ filters().date | date }}</span>
+
+  <div class="toolbar-buttons">
+    <button mat-button (click)="openFiltersDialog()">Change the date</button>
+    <button mat-flat-button (click)="openCurrencyConversionDialog()">
+      Convert currencies
+    </button>
+  </div>
+</mat-toolbar>
+
+@if (exchangeRates(); as exchangeRates) {
+  <app-exchange-rates-list [data]="exchangeRates"></app-exchange-rates-list>
+} @else {
+  {{ apiError() }}
+}

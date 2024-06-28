@@ -1,0 +1,70 @@
+<h2 mat-dialog-title>Currency conversion</h2>
+<mat-dialog-content>
+  @if (dialogData?.length) {
+    <form [formGroup]="form">
+      <mat-form-field appearance="outline">
+        <mat-label>Enter amount</mat-label>
+        <input matInput type="number" formControlName="amount" />
+        @if (form.get('amount')?.invalid) {
+          <mat-error>
+            <app-validation-errors
+              [control]="form.get('amount')!"
+            ></app-validation-errors>
+          </mat-error>
+        }
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Convert from</mat-label>
+        <mat-select formControlName="from">
+          @for (currency of dialogData; track currency) {
+            <mat-option [value]="currency">
+              {{ currency.code }} - {{ currency.currency }}
+            </mat-option>
+          }
+        </mat-select>
+        @if (form.get('from')?.invalid) {
+          <mat-error>
+            <app-validation-errors
+              [control]="form.get('from')!"
+            ></app-validation-errors>
+          </mat-error>
+        }
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Convert to</mat-label>
+        <mat-select formControlName="to">
+          @for (currency of dialogData; track currency) {
+            <mat-option [value]="currency">
+              {{ currency.code }} - {{ currency.currency }}
+            </mat-option>
+          }
+        </mat-select>
+        @if (form.get('to')?.invalid) {
+          <mat-error>
+            <app-validation-errors
+              [control]="form.get('to')!"
+            ></app-validation-errors>
+          </mat-error>
+        }
+      </mat-form-field>
+    </form>
+  } @else {
+  <p class="mat-body-large">
+    There are no exchange rates for the chosen date. Please choose another date.
+  </p>
+  }
+
+  @if (conversionResult(); as result) {
+    <h3 class="mat-title-large">Conversion result</h3>
+    <p class="mat-body-large">
+      For {{ this.form.get('amount')?.value }}
+      {{ this.form.get('from')?.value?.code }} you will receive
+      {{ result.toFixed(2) }} {{ this.form.get('to')?.value?.code }}
+    </p>
+  }
+</mat-dialog-content>
+<mat-dialog-actions>
+  <button mat-button mat-dialog-close>Close</button>
+</mat-dialog-actions>
